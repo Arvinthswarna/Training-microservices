@@ -1,0 +1,116 @@
+
+create database demoDBMysql;
+
+Use demoDBMysql;
+
+create table User(user_id int,user_name varchar(50),user_added_date varchar(50),user_password varchar(50),user_mobile int);
+
+create table Note(note_id int,note_title varchar(50),note_content varchar(50),note_status varchar(50),note_creation_date varchar(50));
+
+create table Category(category_id int,category_name varchar(50),category_descr varchar(50),category_creation_date varchar(50));
+
+create table Reminder(reminder_id int,reminder_name varchar(50),reminder_descr varchar(50),reminder_type varchar(50),reminder_creation_date varchar(50),reminder_creator varchar(50));
+
+create table NoteCategory(notecategory_id int,note_id int,category_id int);
+
+create table Notereminder(notereminder_id int,note_id int,reminder_id int);
+
+create table usernote(usernote_id int,user_id int,note_id int);
+
+insert into user(user_id,user_name,user_added_date,user_password,user_mobile)values(1,"sri",17-08-22,"chennai",96004411);
+
+insert into user()values(2,"raksha",18-08-22,"bangalore",96004412);
+
+insert into user()values(3,"john",19-08-22,"ernakulam",96004413);
+
+insert into category(category_id,category_name,category_descr,category_creation_date)values(1,"physics","magnetism","17-08-2022");
+
+insert into category(category_id,category_name,category_descr,category_creation_date)values(2,"chemistry","electrchemistry","18-08-2022");
+
+insert into category(category_id,category_name,category_descr,category_creation_date)values(3,"botany","photosynthesis","19-08-2022");
+
+insert into reminder(reminder_id,reminder_name,reminder_descr,reminder_type,reminder_creation_date,reminder_creator)values(1,"chennai","metro","marina","21-08-2022","bob");
+
+insert into reminder(reminder_id,reminder_name,reminder_descr,reminder_type,reminder_creation_date,reminder_creator)values(2,"bangalore","metro","Meenakshi mall","22-08-2022","vinay");
+
+insert into reminder(reminder_id,reminder_name,reminder_descr,reminder_type,reminder_creation_date,reminder_creator)values(3,"ernakulam","kerala","lulu mall","22-08-2022","swarna");
+
+insert into notecategory(notecategory_id,note_id,category_id)values(2,450,250);
+
+insert into notecategory(notecategory_id,note_id,category_id)values(3,550,350);
+
+insert into notecategory(notecategory_id,note_id,category_id)values(4,650,450);
+
+insert into notereminder(notereminder_id,note_id,reminder_id)values(5,750,550);
+
+insert into notereminder(notereminder_id,note_id,reminder_id)values(6,850,650);
+
+insert into notereminder(notereminder_id,note_id,reminder_id)values(7,950,750);
+
+select * from user;
+
+select * from note;
+ 
+select * from category;
+
+select * from reminder;
+
+select * from usernote;
+
+select * from notecategory;
+
+select * from notereminder;
+
+insert into usernote(usernote_id,user_id,note_id)values(1,300,800);
+
+insert into usernote(usernote_id,user_id,note_id)values(2,400,1000);
+
+insert into usernote(usernote_id,user_id,note_id)values(2,600,1200);
+
+Fetch Operation:
+==================
+
+1.select * from user where user_id = "2" and user_password = "bangalore";
+
+
+2.select * from note where note_creation_date = "20-08-2022";
+
+3.select * from category where category_creation_date > "17-08-2022";
+
+4.select note_id from usernote where user_id = "300";
+
+5.update note set note_status ="Running" where note_id = 1;
+
+6.select * from note inner join usernote on note.note_id = usernote.note_id where usernote.user_id = 300;  //update usernote set note_id = 1 where user_id = 3
+
+7.select * from note inner join notecategory on note.note_id = notecategory.note_id where notecategory.category_id = 250;  //update  notecategory set note_id = 1 where category_id = 250;
+ 
+8.select * from note left join notecategory on note.note_id = notecategory.note_id where notecategory.category_id = 250; 
+
+9.select * from note right join notecategory on note.note_id = notecategory.note_id where notecategory.category_id = 250;  
+ 
+
+query 7,8,9 gives same answer for this table
+
+10.Fetch all the reminder details for a given noteid:
+------------------------------------------------------
+
+Ans: select * from reminder Inner join notereminder on reminder.reminder_id = notereminder.reminder_id where reminder.reminder_id = 1;
+
+//update notereminder set reminder_id = 1 where reminder_id = 550;
+
+11.Fetch the reminder details for a given reminder id:
+--------------------------------------------------------
+Ans: select * from reminder where reminder_id = 1
+
+12.write a query to create a new Note from particular user (use Note and Usernotetables-insert statement) 
+
+ans: insert note from note inner join usernote on note.note_id = usernote.note_id where usernote.note_id = 1;
+
+13.write a query to delete particular note added by a user(Note and usernote tables - delete statement:
+---------------------------------------------------------------------------------------------------------
+
+ans.delete note from note inner join usernote on note.note_id = usernote.note_id where usernote.note_id = 1;
+
+14.Create a trigger to delete all matching records from Usernote,Notereminder and notecategory table when :1.A particular note is deleted from note table (all
+matching records from usernote,notereminder,notecategory should be removed automatically)2.A particular user is deleted from usertable(all the matching notes should be removed automatically)

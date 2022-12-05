@@ -1,0 +1,15 @@
+server:
+  port: 3001
+
+spring:
+  application:
+    name: PRODUCT-SERVICE-C2
+
+eureka:
+  client:
+    register-with-client: true
+    fetch-registry: true
+    service-url:
+      default:zone: http://localhost:8761/eureka/
+    instance:
+      hostname: localhost

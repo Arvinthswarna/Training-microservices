@@ -1,0 +1,50 @@
+Aggregation:
+------------
+        MongoDB Aggregation is a pipeline that process the data on each pipeline stage
+
+
+Input----------->$match------>$group--------->$sort------->output
+
+pipeline = [
+           {$match:{...}},
+           {$group:{...}},
+           {$sort: {...}}
+]
+db.collectionName.aggregate(pipeline,options)
+
+
+Import document:
+
+mongoimport --jsonArray --db mydb --collection Test --file jsonformatter.json
+
+
+Aggregate:
+-----------
+
+Database:mydb Collections:Test
+
+1.db.Test.aggregate([{$match:{state:"MA"}}])
+
+2.db.Test.aggregate({$count:"id"})
+
+3.db.Test.aggregate([{$match:{state:"MA"}},{$count:"Number of records"}])
+
+4.db.Test.aggregate([{$match:{state:"MA"}},{$group:{_id:"$city"}}])
+
+5.db.Test.aggregate([{$match:{state:"MA"}},{$group:{_id:"$city"}},{$count:"Number of records"}])
+
+6.db.Test.aggregate([{$match:{state:"MA"}},{$group:{_id:"$city"}},{$limit:5}])
+
+7.db.Test.aggregate([{$match:{state:"MA"}},{$group:{_id:"$city"}}]).sort({_id:-1})
+
+8.db.Test.aggregate([{$match:{state:"MA"}},{$group:{_id:"$city"}}]).sort({_id:1})
+
+9.db.Test.aggregate([{$match:{state:"MA"}},{$sort:{pop:1}}])
+
+10.db.Test.aggregate([{$match:{state:"MA"}},{$sort:{pop:-1}}])
+
+11.db.Test.aggregate([{$match:{state:"MA"}},{$sort:{pop:1}},{$limit:3}])      // pop refers to population in
+
+12.db.Test.aggregate([{$match:{state:"MA"}},{$sort:{pop:-1}},{$limit:3}])
+
+13.db.Test.aggregate([{$match:{state:"USA"}},{$sort:{pop:1}}])

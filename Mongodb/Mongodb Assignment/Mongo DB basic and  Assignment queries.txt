@@ -1,0 +1,268 @@
+
+
+Software Engineering:
+=====================
+                Well defined scientific principles,techniques and procedure.
+
+High quality
+Cost effective
+Reliable
+Secured
+Dynamic(upgrades etc)
+
+SDLC:
+-----
+
+  Software development life cycle
+  
+  1.Requirements Gathering
+  
+  2.Analysis or Feasibility study
+
+  3.Design
+
+  4.Coding <- sonarcube
+
+  5.Testing
+
+  6.Implementation
+
+  7.Maintainence
+
+Requirements for train ticket booking:
+
+1.Users module
+
+2.session Management
+
+3.logs
+
+4.Role Management
+
+5.Reporting
+
+Sonarcube:
+
+ sonarcube is an open source software quality platform.It saves the calculated measures in a database and showcases them in a rich web based dashboard.
+ It provides trends and leading indicatores.
+
+
+Waterfall model:
+
+1.Feasibility study
+
+2.Requirement analysis and specification
+
+3.
+
+Spiral model:
+
+1.Objectives determination and idenify alternative solutions
+
+2.Identify and resolve risks
+
+Agile Methodologies:
+
+1.New technology having sprint type.
+
+22-08-22
+
+NO SQL - Not only sql
+
+Non - tabular databases and store data differently than relational tables.
+
+Document:-Json Objects.(javascript,object,notation)
+key - value
+
+Flexible Schemas
+
+Fast queries due to the data model
+Ease of use
+
+id    email               password
+
+1     sri@gmail.com       123456
+
+{
+id:"1"
+email: "sri@gmail.com"
+password:"123456"
+}
+
+
+Table                 Collection
+
+rows and column       document
+
+
+MongoDB commands:
+==================
+
+1.show dbs;list all databases
+
+2.use sampledb; to select db
+
+3.db;lists selected db name or current db;
+
+4.show collections;
+
+5.db.createCollection("users");
+
+6.db.users.insertOne({email:'sri@gmail.com',password:'123456'});   //create
+
+7.db.users.find(); //read
+
+8.db.users.updateOne({ _id: ObjectId("630488f74cd8283f980e2de9")},{$set:{password:'88888'}})   //update //users denote collections
+
+9.db.users.deleteOne({ _id: ObjectId("63048a1c4cd8283f980e2dea")});//delete
+
+10.db.users.count();
+
+11.db.users.updateOne({email:'sri@gmail.com'},{$set:{age:23}})
+
+12.db.users.insertOne({email:'john@gmail.com',password:'123457',age:'24'});   //create
+
+13.db.users.find({age:{$eq:'23'}})  //[query operator]
+
+14.db.users.find({age:{$gt:'23'}})
+
+15.db.users.insertOne({email:'anoop@gmail.com',password:'123457',age:'25'});   //create
+
+16.db.users.insertOne({email:'ajith@gmail.com',password:'123457',age:'26'});   //create
+
+17.db.users.find({age:{$gte:'23'}})
+
+18.db.users.find({},{email:1}) //to get all emails  1 is used for checking email is present or not ie:either 1 or true can be used.
+   The same syntax can be used for getting all fields.
+
+19.db.users.find({},{email:0}) //except email all fields we get.
+
+20.db.users.find({age:{$lte:'25'}})
+//dropping a database
+21. use db 
+
+22.db.dropDatabase();
+
+
+
+===================================================================================================
+
+24/08/2022  Mongo db imported files movies and has 88 files
+
+21.db.movies.find().limit(1) //movies has 88 record.if we use this it ll give only record that of random
+
+22.db.movies.find({year:{$in:[1958,1979]}})
+
+23.db.movies.find({year:{$in:[1958,1979]}}).count()
+
+24.db.movies.find({year:{$ne:1986}}).count()
+
+25.db.movies.find({year:{$eq:1986}}).count(),db.movies.find({year:{$eq:1986}})
+
+26.db.movies.find({year:{$eq:1986}},{title:1})
+
+27.db.movies.find({year:{$eq:1986}},{title:1,genre:1})
+
+28.db.movies.find({year:{$in:[1958,1979,1997]}},{title:1,genre:1})
+
+29.db.movies.find({year:{$in:[1958,1979,1997]}},{title:1,genre:1}).count()
+
+30.db.movies.find().limit(4)
+
+31.db.movies.find({year:{$nin:[1958,1979,1997]}},{title:1,genre:1}).count()
+
+32.db.movies.find({$and:[{title:{$eq:'Vertigo'}},{year:{$eq:1958}}]}).count()  ,db.movies.find({$and:[{title:{$eq:'Vertigo'}},{year:{$eq:1958}}]}); //In and command both the conditionsn are true then only execute.
+
+33.db.movies.find({'director.last_name':'Hitchcock'},{title:1,year:1}).count()
+
+34.db.movies.find({'director.last_name':'Hitchcock'},{title:1,year:1}).sort({year:1})
+
+35.db.movies.find({'director.last_name':'Hithcock'},{title:1,year:1}).sort({year:-1})
+
+36.db.movies.find({$or:[{title:{$eq:'Vertigo'}},{year:{$eq:1957}}]}).count()  // In or command either title or year is true it will execute  //in this year is false but executing vertigo
+
+37.db.movies.find({$nor:[{title:{$eq:'Vertigo'}},{year:{$eq:1958}}]}).count()
+
+38.db.movies.find({$not:[{title:{$eq:'Vertigo'}},{year:{$eq:1958}}]}).count()
+
+
+Mongo DB Assignment (9 queries);
+
+1.db.movies.find({title:{$eq:'gladiator'}})  OR db.movies.find({title:'Gladiator'})
+
+2.db.movies.distinct('genre');
+
+3.db.movies.find({$or:[{genre:"crime"},{genre:"drama"}]}),
+
+4.db.movies.find({'director.last_name':'Hitchcock'},{title:1,year:1}).sort({year:1})
+
+5.db.movies.find({'actors.last_name':'Cotillard'})
+
+6.db.movies.find({year:{$in:[1967,1995]}})
+
+7.db.movies.find,({year:{$in:[1967,1995]},{title:1,year:1,director.last_name:1}).sort({year:-1})
+
+8.db.movies.aggregate([{$group:{_id:'$country',title:{$sum:1}}}])    
+
+8.db.movies.aggregate([{$group:{_id:{country:'$country'},count:{$sum:1}}}])    
+
+9.db.movies.aggregate([{$group:{_id:'$country',title:{$sum:1}}}])
+
+9.db.movies.aggregate([{$group:{_id:'$country',actors:{$sum:1}}}])
+
+9.db.movies.aggregate([{$group:{_id:'$country',actors:{$sum:1},title:{$sum:1}}}])
+
+
+
+
+Mongodb products:(practice)
+
+1.show dbs;
+
+2.use sampledb;
+
+3.db;
+
+4.show collections;
+
+5.db.createCollection("products");
+
+6.db.products.insertOne({email:'kohli@gmail.com',password:'123456'});  //create
+
+7.db.products.find();
+
+8.db.products.insertOne({email:'anushka@gmail.com',password:'987654'});  //create
+
+9.db.products.updateOne({ _id: ObjectId("6304a37c495bdc94ef97071d")},{$set:{password:'44444'}})   //update
+
+10.db.products.deleteOne({_id: ObjectId("6304a432495bdc94ef97071e")});//delete
+
+11.db.users.count();
+
+12.db.products.insertOne({email:'trisha@gmail.com',password:'856389'});  //create
+
+
+Mongodb Assignment:
+===================
+
+Steps to import moviesList.json in mongoDB:
+
+1.Login into mongosh
+
+2.create a new db: Movie
+
+3..configure mongoimport by navigating to
+
+       https://www.mongodb.com/try/download/database-tools?tck=docs_databasetools
+
+4.setup the environment path variable
+(C:\Program Files\MongoDB\Tools\100\bin)
+
+5.open a new command prompt and execute the following command:
+  mongoimport--jsonArray --db movie --collection movies --file moviesList.json
+
+6.Upon success:
+
+ 88 document(s) imported successfully.0 document(s) failed to import.
+
+

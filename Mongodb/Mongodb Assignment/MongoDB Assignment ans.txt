@@ -1,0 +1,25 @@
+Mongo DB Assignment (9 queries);
+
+1.db.movies.find({title:{$eq:'gladiator'}})  OR db.movies.find({title:'Gladiator'})
+
+2.db.movies.distinct('genre');
+
+3.db.movies.find({$or:[{genre:"crime"},{genre:"drama"}]}),
+
+4.db.movies.find({'director.last_name':'Hitchcock'},{title:1,year:1}).sort({year:1})
+
+5.db.movies.find({'actors.last_name':'Cotillard'})
+
+6.db.movies.find({year:{$in:[1967,1995]}})
+
+7.db.movies.find,({year:{$in:[1967,1995]},{title:1,year:1,director.last_name:1}).sort({year:-1})
+
+8.db.movies.aggregate([{$group:{_id:'$country',title:{$sum:1}}}])    
+
+8.db.movies.aggregate([{$group:{_id:{country:'$country'},count:{$sum:1}}}])    
+
+9.db.movies.aggregate([{$group:{_id:'$country',title:{$sum:1}}}])
+
+9.db.movies.aggregate([{$group:{_id:'$country',actors:{$sum:1}}}])
+
+9.db.movies.aggregate([{$group:{_id:'$country',actors:{$sum:1},title:{$sum:1}}}])

@@ -1,0 +1,56 @@
+1.show dbs;list all databases
+
+2.use sampledb; to select db
+
+3.db;lists selected db name or current db;
+
+4.show collections;
+
+5.db.createCollection("users");
+
+6.db.users.insertOne({email:'sri@gmail.com',password:'123456'});   //create
+
+7.db.users.find(); //read
+
+8.db.users.updateOne({ _id: ObjectId("630488f74cd8283f980e2de9")},{$set:{password:'88888'}})   //update //users denote collections
+
+9.db.users.deleteOne({ _id: ObjectId("63048a1c4cd8283f980e2dea")});//delete
+
+10.db.users.count();
+
+11.db.users.updateOne({email:'sri@gmail.com'},{$set:{age:23}})
+
+12.db.users.insertOne({email:'john@gmail.com',password:'123457',age:'24'});   //create
+
+13.db.users.find({age:{$eq:'23'}})  //[query operator]
+
+14.db.users.find({age:{$gt:'23'}})
+
+15.db.users.insertOne({email:'anoop@gmail.com',password:'123457',age:'25'});   //create
+
+16.db.users.insertOne({email:'ajith@gmail.com',password:'123457',age:'26'});   //create
+
+17.db.users.find({age:{$gte:'23'}})
+
+18.db.users.find({},{email:1}) //to get all emails  1 is used for checking email is present or not ie:either 1 or true can be used.
+   The same syntax can be used for getting all fields.
+
+19.db.users.find({},{email:0}) //except email all fields we get.
+
+20.db.users.find({age:{$lte:'25'}})
+
+
+
+
+Case study queries:
+====================
+
+1.use javacasestudy;
+
+2.db.createCollection("passengers");
+
+3.db.createCollection("trains");
+
+4.db.createCollection("tickets");
+
+

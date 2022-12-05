@@ -1,0 +1,102 @@
+Case Study : Kotlin
+	===================
+
+	Online Ticket Booking
+	---------------------
+	
+	Passenger Details: passengers
+	------------------
+	     PK
+	  Passenger_ID Passenger_Name Passenger_Age Gender Phone
+	    001           John             23        M    0987654321
+
+	Train Details:  train
+	---------------
+	  PK								     
+	  Train_Id  Train_No  Train_Name  Source   Destination Start_Date_Time      Arrival_Time
+	   1          67543    KK Express  Delhi    Bangalore  03-08-2022 6:00AM   04-08-2022 12:00PM
+
+	Ticket Details: ticket
+	---------------
+          pk                       FK       FK
+	  id   Ticket_Number Passenger_ID Train_ID Ticket_Price
+	  1       67676         001           1        1700
+
+
+	Solution:
+	---------
+
+	Create files:
+			Passenger.kt
+			Train.kt
+			Ticket.kt
+
+
+
+Assignment part:
+==================
+
+create database onlineticketdb;
+
+use onlineticketdb;
+
+create table passenger(passenger_id int not null auto_increment,passenger_name varchar(50),passenger_age varchar(50),gender varchar(50),phone varchar(50),primary key(passenger_id));
+ 
+insert into passenger(passenger_id,passenger_name,passenger_age,gender,phone)values(001,"bob","18","M","1234567890");
+
+insert into passenger(passenger_id,passenger_name,passenger_age,gender,phone)values(002,"john","20","M","1234567891");
+
+insert into passenger(passenger_id,passenger_name,passenger_age,gender,phone)values(003,"charles","21","M","1234567892");
+
+insert into passenger(passenger_id,passenger_name,passenger_age,gender,phone)values(004,"vinay","22","M","1234567893");
+
+insert into passenger(passenger_id,passenger_name,passenger_age,gender,phone)values(006,"krunal","23","M","1234567894");
+
+
+
+
+
+
+create table train(train_id int not null auto_increment,train_no int,train_name varchar(50),source varchar(50),destination varchar(50),start_date_time varchar(50),Arrival_time varchar(50),primary key(train_id));
+
+insert into train(train_id,train_no,train_name,source,destination,start_date_time,arrival_time)values(1,"12387","raptisagar","gorakhpur","trivandrum","04-08-22 5.00am","05-08-22 6.00am");
+
+insert into train(train_id,train_no,train_name,source,destination,start_date_time,arrival_time)values(2,"12382","sabari","hyderabad","trivandrum","05-08-22 5.00am","06-08-22 7.00am");
+
+insert into train(train_id,train_no,train_name,source,destination,start_date_time,arrival_time)values(3,"12567","nilgriri","chennai","mettupalayam","05-08-22 9.00pm","06-08-22 6.15am");
+
+insert into train(train_id,train_no,train_name,source,destination,start_date_time,arrival_time)values(4,"12682","cheran","chennai","coimbatore","05-08-22 10.00pm","06-08-22 6.00am");
+
+
+create table ticket(ticket_id int not null auto_increment,ticket_number varchar(50),passenger_id varchar(50),train_id varchar(50),ticket_price varchar(50),primary key(ticket_id));
+
+insert into ticket(ticket_id,ticket_number,passenger_id,train_id,ticket_price)values(1,"67676","001","1",1700);
+
+insert into ticket(ticket_id,ticket_number,passenger_id,train_id,ticket_price)values(2,"67677","002","2",1500);
+
+insert into ticket(ticket_id,ticket_number,passenger_id,train_id,ticket_price)values(4,"67679","004","4",1900);
+
+insert into ticket(ticket_id,ticket_number,passenger_id,train_id,ticket_price)values(5,"67670","005","5",3900);
+
+
+
+alter table ticket add foreign key(passenger_id) references passenger(passenger_id);
+
+alter table ticket modify passenger_id int;
+
+alter table ticket modify train_id int;
+
+alter table ticket add foreign key(train_id) references train(train_id);
+
+select * from passenger;
+
+select * from train;
+
+select * from ticket;
+
+update passenger
+    set passenger_age = 23 where passenger_id = 3;
+
+delete from ticket where train_id= 3;
+
+
